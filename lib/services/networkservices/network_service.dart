@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_app_with_dio/models/response/api_response.dart';
 import 'package:flutter_app_with_dio/services/networkservices/api_constants.dart';
 import 'package:flutter_app_with_dio/services/networkservices/custom_interceptor.dart';
@@ -23,8 +24,11 @@ class NetworkService with RequestHandlers {
           message: response.statusMessage,
           data: response.data);
     } on DioError catch (e) {
+      if (kDebugMode) {
+        print(e.message);
+      }
       return ApiResponse(
-        message: e.message,
+        message: "IO Error Occurred!!",
       );
     }
   }
@@ -40,8 +44,11 @@ class NetworkService with RequestHandlers {
           message: response.statusMessage,
           data: response.data);
     } on DioError catch (e) {
+      if (kDebugMode) {
+        print(e.message);
+      }
       return ApiResponse(
-        message: e.message,
+        message: "IO Error Occurred!!",
       );
     }
   }
