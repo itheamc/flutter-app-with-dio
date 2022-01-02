@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_with_dio/models/response/api_response.dart';
 import 'package:flutter_app_with_dio/repositories/users_repository/user_repository.dart';
 
-class UsersPage extends StatefulWidget {
+class UsersPage extends StatelessWidget {
   const UsersPage({Key? key}) : super(key: key);
 
-  @override
-  _UsersPageState createState() => _UsersPageState();
-}
-
-class _UsersPageState extends State<UsersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,3 +46,4 @@ class _UsersPageState extends State<UsersPage> {
     );
   }
 }
+
