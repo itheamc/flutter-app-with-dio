@@ -37,4 +37,12 @@ class PostProvider with ChangeNotifier {
       print("Wait...Fetching request was already made!!");
     }
   }
+
+  Future<void> refresh() async {
+    if (!_fetching) {
+      _fetching = true;
+      await Future.delayed(const Duration(milliseconds: 500));
+      await _fetch();
+    }
+  }
 }
