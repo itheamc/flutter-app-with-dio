@@ -10,10 +10,7 @@ class PostsPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Posts"),
-          centerTitle: true,
-          actions: [
-            IconButton(onPressed: context.read<PostProvider>().load, icon: const Icon(Icons.refresh))
-          ],
+          centerTitle: true
         ),
         body: Consumer<PostProvider>(
           builder: (context, provider, child) {
@@ -25,15 +22,19 @@ class PostsPage extends StatelessWidget {
             if (response.status != 200) return Center(child: Text(response.message ?? "Server problem!!"));
 
             if (response.data == null) return const Center(child: Text("No data!!"));
-            return ListView.builder(
-              itemCount: response.data.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(response.data[index].title),
-                  subtitle: Text(response.data[index].body, maxLines: 1, overflow: TextOverflow.ellipsis),
-                  leading: Text(response.data[index].id.toString()),
-                );
-              },
+            return RefreshIndicator(
+                child: ListView.builder(
+                  itemCount: response.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text(response.data[index].title),
+                      subtitle: Text(response.data[index].body, maxLines: 1, overflow: TextOverflow.ellipsis),
+                      leading: Text(response.data[index].id.toString()),
+                    );
+                  },
+                ),
+                onRefresh: provider.refresh,
+                displacement: 18.0,
             );
           },
         )
