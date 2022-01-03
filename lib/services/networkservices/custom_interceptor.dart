@@ -10,7 +10,7 @@ class NetworkInterceptor extends Interceptor {
     if (kDebugMode) {
       print("NetworkInterceptor_OnError: ${err.response}");
     }
-    handler.next(err);
+    super.onError(err, handler);
   }
 
   @override
@@ -18,7 +18,7 @@ class NetworkInterceptor extends Interceptor {
     if (kDebugMode) {
       print("NetworkInterceptor_OnRequest: ${options.path}");
     }
-    handler.next(options);
+    super.onRequest(options, handler);
   }
 
   @override
@@ -48,6 +48,6 @@ class NetworkInterceptor extends Interceptor {
         redirects: response.redirects,
         extra: response.extra);
 
-    handler.next(modResponse);
+    super.onResponse(modResponse, handler);
   }
 }

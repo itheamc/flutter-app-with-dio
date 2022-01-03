@@ -10,7 +10,9 @@ class NetworkService with RequestHandlers {
 
   NetworkService.initialize() {
     final options = BaseOptions(baseUrl: baseUrl);
-    _dio = Dio(options)..interceptors.add(NetworkInterceptor());
+    _dio = Dio(options)
+      ..interceptors.add(NetworkInterceptor());
+      // ..transformer = CustomTransformer();
   }
 
   @override
